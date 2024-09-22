@@ -55,3 +55,15 @@ def addUserById(userId:str, data:dict)-> dict:
     except Exception as e:
         print(f"Can't add user by id = {userId}: {e}")
         return None
+    
+def modifyUserById(userId:str, data:dict)-> dict:
+    '''Заменяет словарь значений, переданных в словаре data в файле
+    с id={userId}. Возвращает результат сохранения'''
+    try:
+        db = db_interface("user")
+        db.modifyById(userId, data)
+        data = db.getById(userId)
+        return data
+    except Exception as e:
+        print(f"Can't modify user by id = {userId}: {e}")
+        return None
