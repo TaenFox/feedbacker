@@ -5,7 +5,6 @@ def getFeedbackById(feedbackId:str)-> dict:
     try:
         db_feedback = db_interface("feedback")
         data = db_feedback.getById(feedbackId)
-        if data == None: raise Exception("No data has been read")
         return data
     except Exception as e:
         print(f"Can't get feedback by id = {feedbackId}: {e}")
