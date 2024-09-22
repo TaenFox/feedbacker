@@ -8,6 +8,7 @@ class FileDataBase():
         '''Извлекает информацию из json-файла в указанной директории, 
         название которого соответствует маске `{id}.json`. 
         Возвращает словарь'''
+        #TODO обработать ситуации, когда файл не существует
         try:
             with open(f"{self.catalog}/{id}.json", "r", encoding="utf-8") as json_file:
                 data = json.load(json_file)
