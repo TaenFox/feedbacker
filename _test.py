@@ -4,10 +4,11 @@ import uuid, json
 
 d = db.FileDataBase("feedback")
 i = str(uuid.uuid4())
-d.addById(i, {"1":1})
-
-d.modifyById(i, {"1":2})
-
-i = "36d1395b-c0a5-4a11-a0d1-eddcf1408862"
+print(f"./data/feedback/{i}.json")
+data = {
+    "1":1,
+    "2":2
+}
+dbi.addFeedbackById(i, data)
 
 print(json.dumps(dbi.getFeedbackById(i)))
