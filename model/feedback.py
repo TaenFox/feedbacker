@@ -30,6 +30,4 @@ class feedback():
         except Exception as e:
             print(f"Can't use 'data' dictionary: {e}")
 
-        
-    def new(self, data)-> None:
-        pass
+        return self
