@@ -11,4 +11,8 @@ data = {
 }
 dbi.addFeedbackById(i, data)
 
+data["3"]=3
+
+dbi.modifyFeedbackById(i, data)
+
 print(json.dumps(dbi.getFeedbackById(i)))

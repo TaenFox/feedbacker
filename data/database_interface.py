@@ -23,4 +23,13 @@ def addFeedbackById(feedbackId:str, data:dict)-> dict:
         return None
 
 def modifyFeedbackById(feedbackId:str, data:dict)-> dict:
-    pass
+    '''Заменяет словарь значений, переданных в словаре data в файле
+    с id={feedbackId}. Возвращает результат сохранения'''
+    try:
+        db_feedback = db_interface("feedback")
+        db_feedback.modifyById(feedbackId, data)
+        data = db_feedback.getById(feedbackId)
+        return data
+    except Exception as e:
+        print(f"Can't modify feedback by id = {feedbackId}: {e}")
+        return None
