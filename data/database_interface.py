@@ -33,3 +33,15 @@ def modifyFeedbackById(feedbackId:str, data:dict)-> dict:
     except Exception as e:
         print(f"Can't modify feedback by id = {feedbackId}: {e}")
         return None
+    
+def addUserById(userId:str, data:dict)-> dict:
+    '''Сохраняет словарь значений, переданных в словаре data. 
+    Сохраняется с id={userId}. Возвращает результат сохранения'''
+    try:
+        db_user = db_interface("user")
+        db_user.addById(userId, data)
+        #TODO data = db_user.getById(userId)
+        return data
+    except Exception as e:
+        print(f"Can't add user by id = {userId}: {e}")
+        return None
