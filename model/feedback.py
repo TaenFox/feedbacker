@@ -13,6 +13,7 @@ class Feedback():
         - authorId - идентификатор автора фидбека
         - receiverId - идентификатор получателя фидбека
         '''
+        #TODO добавить проверку на строковые данные
         try:
             if "feedbackId" not in data: raise Exception("No 'feedbackId' in 'data'")
             if "content" not in data: raise Exception("No 'content' in 'data'")
@@ -38,7 +39,7 @@ class Feedback():
                 "feedbackId": self.feedbackId,
                 "content": self.content,
                 "authorId": self.authorId,
-                "receiverId": self.receiverId,
+                "receiverId": self.receiverId
             }
             return data
         except Exception as e:
