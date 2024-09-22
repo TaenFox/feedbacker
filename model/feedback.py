@@ -1,5 +1,5 @@
 
-class feedback():
+class Feedback():
     feedbackId: str
     content: str
     authorId: str
@@ -29,5 +29,17 @@ class feedback():
             self.receiverId = data['receiverId']
         except Exception as e:
             print(f"Can't use 'data' dictionary: {e}")
+        return
 
-        return self
+    def toDict(self):
+        '''Возвращает словарь с полями фидбека'''
+        try:
+            data = {
+                "feedbackId": self.feedbackId,
+                "content": self.content,
+                "authorId": self.authorId,
+                "receiverId": self.receiverId,
+            }
+            return data
+        except Exception as e:
+            print(f"Can't construct dictionary for feedback id={self.feedbackId}: {e}")
