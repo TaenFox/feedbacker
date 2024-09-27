@@ -5,21 +5,21 @@ import uuid, json
 i = str(uuid.uuid4())
 
 data = {
-    "userId": i,
-    "sentFeedbackIds": [],
-    "recievedFeedbackIds":[]
+    "user_id": i,
+    "sent_feedback_ids": [],
+    "recieved_feedback_ids":[]
 }
 u1 = User(data)
-data = u1.toDict()
+data = u1.to_dict()
 
-dbi.addUserById(u1.userId, u1.toDict())
+dbi.addUserById(u1.user_id, u1.to_dict())
 
 print(json.dumps(dbi.getUserById(i)))
 
-data_to_modify:dict = u1.toDict()
-list_to_modify:list = data_to_modify["sentFeedbackIds"]
+data_to_modify:dict = u1.to_dict()
+list_to_modify:list = data_to_modify["sent_feedback_ids"]
 list_to_modify.append("1234567")
-data_to_modify["sentFeedbackIds"] = list_to_modify
+data_to_modify["sent_feedback_ids"] = list_to_modify
 dbi.modifyUserById(i, data_to_modify)
 
 print(json.dumps(dbi.getUserById(i)))
