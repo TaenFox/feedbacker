@@ -1,46 +1,42 @@
 
 class Feedback():
-    feedbackId: str
+    feedback_id: str
     content: str
-    authorId: str
-    receiverId: str
+    author_id: str
+    receiver_id: str
 
     def __init__(self, data: dict) -> None:
         '''
         Объект фидбека. В аргументы передаётся словарь с ключами (значения в них строковые):
-        - feedbackId - идентификатор фидбека
+        - feedback_id - идентификатор фидбека
         - content - сообщение фидбека
-        - authorId - идентификатор автора фидбека
-        - receiverId - идентификатор получателя фидбека
+        - author_id - идентификатор автора фидбека
+        - receiver_id - идентификатор получателя фидбека
         '''
         #TODO добавить проверку на строковые данные
-        try:
-            if "feedbackId" not in data: raise Exception("No 'feedbackId' in 'data'")
-            if "content" not in data: raise Exception("No 'content' in 'data'")
-            if "authorId" not in data: raise Exception("No 'authorId' in 'data'")
-            if "receiverId" not in data: raise Exception("No 'receiverId' in 'data'")
-        except Exception as e:
-            print(e)
-            return None
+        if "feedback_id" not in data: raise Exception("No 'feedback_id' in 'data'")
+        if "content" not in data: raise Exception("No 'content' in 'data'")
+        if "author_id" not in data: raise Exception("No 'author_id' in 'data'")
+        if "receiver_id" not in data: raise Exception("No 'receiver_id' in 'data'")
         
         try:
-            self.feedbackId = data['feedbackId']
+            self.feedback_id = data['feedback_id']
             self.content = data['content']
-            self.authorId = data['authorId']
-            self.receiverId = data['receiverId']
+            self.author_id = data['author_id']
+            self.receiver_id = data['receiver_id']
         except Exception as e:
             print(f"Can't use 'data' dictionary: {e}")
         return
 
-    def toDict(self):
+    def to_dict(self):
         '''Возвращает словарь с полями фидбека'''
         try:
             data = {
-                "feedbackId": self.feedbackId,
+                "feedback_id": self.feedback_id,
                 "content": self.content,
-                "authorId": self.authorId,
-                "receiverId": self.receiverId
+                "author_id": self.author_id,
+                "receiver_id": self.receiver_id
             }
             return data
         except Exception as e:
-            print(f"Can't construct dictionary for feedback id={self.feedbackId}: {e}")
+            print(f"Can't construct dictionary for feedback id={self.feedback_id}: {e}")
