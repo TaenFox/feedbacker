@@ -13,11 +13,15 @@ class Feedback():
         - author_id - идентификатор автора фидбека
         - receiver_id - идентификатор получателя фидбека
         '''
-        #TODO добавить проверку на строковые данные
+        
         if "feedback_id" not in data: raise Exception("No 'feedback_id' in 'data'")
+        if type(data["feedback_id"]) is not str: raise Exception("Field 'feedback_id' should be string")
         if "content" not in data: raise Exception("No 'content' in 'data'")
+        if type(data["content"]) is not str: raise Exception("Field 'content' should be string")
         if "author_id" not in data: raise Exception("No 'author_id' in 'data'")
+        if type(data["author_id"]) is not str: raise Exception("Field 'author_id' should be string")
         if "receiver_id" not in data: raise Exception("No 'receiver_id' in 'data'")
+        if type(data["receiver_id"]) is not str: raise Exception("Field 'receiver_id' should be string")
         
         try:
             self.feedback_id = data['feedback_id']
