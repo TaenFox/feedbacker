@@ -2,8 +2,6 @@ from user import User
 import uuid, json
 import pytest
 
-
-
 @pytest.fixture(scope="module")
 def fix_user_data():
     '''Пресет пользовательских данных'''
@@ -14,7 +12,7 @@ def fix_user_data():
     }
 
 def test_create_user_model(fix_user_data):
-    '''Тест проверяет работоспособность класс User:
+    '''Тест проверяет работоспособность класса User:
     - создание экземпляра класса
     - выдачу данных экземпляра класса как словарь'''
     assert User(fix_user_data).toDict() == fix_user_data
