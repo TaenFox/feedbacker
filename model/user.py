@@ -11,15 +11,13 @@ class User():
         - sentFeedbackIds - список идентификаторов отправленных сообщений с фидбеком
         - recievedFeedbackIds - список идентификаторов полученных сообщений с фидбеком
         '''
-        #TODO добавить проверку на строковые данные
-        #TODO добавить проверку на списки
-        try:
-            if "userId" not in data: raise Exception("No 'userId' in 'data'")
-            if "sentFeedbackIds" not in data: raise Exception("No 'sentFeedbackIds' in 'data'")
-            if "recievedFeedbackIds" not in data: raise Exception("No 'recievedFeedbackIds' in 'data'")
-        except Exception as e:
-            print(e)
-            return None
+        if "userId" not in data: raise Exception("No 'userId' in 'data'")
+        if type(data["userId"]) is not str: raise Exception("Field 'userId' should be string")
+        if len(data["userId"]) == 0: raise Exception("Field 'userId' must not be empty")
+        if "sentFeedbackIds" not in data: raise Exception("No 'sentFeedbackIds' in 'data'")
+        if type(data["sentFeedbackIds"]) is not list: raise Exception("Field 'sentFeedbackIds' should be list")
+        if "recievedFeedbackIds" not in data: raise Exception("No 'recievedFeedbackIds' in 'data'")
+        if type(data["recievedFeedbackIds"]) is not list: raise Exception("Field 'recievedFeedbackIds' should be list")
         
         try:
             self.userId = data["userId"]
