@@ -1,41 +1,41 @@
 
 class User():
-    userId: str
-    sentFeedbackIds = []
-    recievedFeedbackIds = []
+    user_id: str
+    sent_feedback_ids = list
+    recieved_feedback_ids = list
 
     def __init__(self, data: dict) -> None:
         '''
         Объект пользователя. В аргументе передаётся словарь с ключами (значения в них строковые):
-        - userId - идентификатор пользователя
-        - sentFeedbackIds - список идентификаторов отправленных сообщений с фидбеком
-        - recievedFeedbackIds - список идентификаторов полученных сообщений с фидбеком
+        - user_id - идентификатор пользователя
+        - sent_feedback_ids - список идентификаторов отправленных сообщений с фидбеком
+        - recieved_feedback_ids - список идентификаторов полученных сообщений с фидбеком
         '''
-        if "userId" not in data: raise Exception("No 'userId' in 'data'")
-        if type(data["userId"]) is not str: raise Exception("Field 'userId' should be string")
-        if len(data["userId"]) == 0: raise Exception("Field 'userId' must not be empty")
-        if "sentFeedbackIds" not in data: raise Exception("No 'sentFeedbackIds' in 'data'")
-        if type(data["sentFeedbackIds"]) is not list: raise Exception("Field 'sentFeedbackIds' should be list")
-        if "recievedFeedbackIds" not in data: raise Exception("No 'recievedFeedbackIds' in 'data'")
-        if type(data["recievedFeedbackIds"]) is not list: raise Exception("Field 'recievedFeedbackIds' should be list")
+        if "user_id" not in data: raise Exception("No 'user_id' in 'data'")
+        if type(data["user_id"]) is not str: raise Exception("Field 'user_id' should be string")
+        if len(data["user_id"]) == 0: raise Exception("Field 'user_id' must not be empty")
+        if "sent_feedback_ids" not in data: raise Exception("No 'sent_feedback_ids' in 'data'")
+        if type(data["sent_feedback_ids"]) is not list: raise Exception("Field 'sent_feedback_ids' should be list")
+        if "recieved_feedback_ids" not in data: raise Exception("No 'recieved_feedback_ids' in 'data'")
+        if type(data["recieved_feedback_ids"]) is not list: raise Exception("Field 'recieved_feedback_ids' should be list")
         
         try:
-            self.userId = data["userId"]
-            self.sentFeedbackIds = data["sentFeedbackIds"]
-            self.recievedFeedbackIds = data["recievedFeedbackIds"]
+            self.user_id = data["user_id"]
+            self.sent_feedback_ids = data["sent_feedback_ids"]
+            self.recieved_feedback_ids = data["recieved_feedback_ids"]
         except Exception as e:
             print(f"Can't use 'data' dictionary: {e}")
         return
     
-    def toDict(self):
+    def to_dict(self):
         '''Возвращает словарь с полями пользователя'''
 
         try:
             data = {
-                "userId": self.userId,
-                "sentFeedbackIds": self.sentFeedbackIds,
-                "recievedFeedbackIds": self.recievedFeedbackIds
+                "user_id": self.user_id,
+                "sent_feedback_ids": self.sent_feedback_ids,
+                "recieved_feedback_ids": self.recieved_feedback_ids
             }
             return data
         except Exception as e:
-            print(f"Can't construct dictionary for user id={self.userId}: {e}")
+            print(f"Can't construct dictionary for user id={self.user_id}: {e}")
