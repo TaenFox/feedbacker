@@ -1,6 +1,6 @@
 from data.file_database import FileDataBase as db_interface
 
-def getFeedbackById(feedbackId:str)-> dict:
+def get_feedback_by_id(feedbackId:str)-> dict:
     '''Получает словарь значений, соответствующих фидбеку с id={feedbackId}'''
     try:
         db = db_interface("feedback")
@@ -10,7 +10,7 @@ def getFeedbackById(feedbackId:str)-> dict:
         print(f"Can't get feedback by id = {feedbackId}: {e}")
         return None
 
-def addFeedbackById(feedbackId:str, data:dict)-> dict:
+def add_feedback_by_id(feedbackId:str, data:dict)-> dict:
     '''Сохраняет словарь значений, переданных в словаре data. 
     Сохраняется с id={feedbackId}. Возвращает результат сохранения'''
     try:
@@ -22,7 +22,7 @@ def addFeedbackById(feedbackId:str, data:dict)-> dict:
         print(f"Can't add feedback by id = {feedbackId}: {e}")
         return None
 
-def modifyFeedbackById(feedbackId:str, data:dict)-> dict:
+def modify_feedback_by_id(feedbackId:str, data:dict)-> dict:
     '''Заменяет словарь значений, переданных в словаре data в файле
     с id={feedbackId}. Возвращает результат сохранения'''
     try:
@@ -34,7 +34,7 @@ def modifyFeedbackById(feedbackId:str, data:dict)-> dict:
         print(f"Can't modify feedback by id = {feedbackId}: {e}")
         return None
     
-def getUserById(userId:str)-> dict:
+def get_user_by_id(userId:str)-> dict:
     '''Получает словарь значений, соответствующих пользователю с id={userId}'''
     try:
         db = db_interface("user")
@@ -44,7 +44,7 @@ def getUserById(userId:str)-> dict:
         print(f"Can't get user by id = {userId}: {e}")
         return None
 
-def addUserById(userId:str, data:dict)-> dict:
+def add_user_by_id(userId:str, data:dict)-> dict:
     '''Сохраняет словарь значений, переданных в словаре data. 
     Сохраняется с id={userId}. Возвращает результат сохранения'''
     try:
@@ -56,7 +56,7 @@ def addUserById(userId:str, data:dict)-> dict:
         print(f"Can't add user by id = {userId}: {e}")
         return None
     
-def modifyUserById(userId:str, data:dict)-> dict:
+def modify_user_by_id(userId:str, data:dict)-> dict:
     '''Заменяет словарь значений, переданных в словаре data в файле
     с id={userId}. Возвращает результат сохранения'''
     try:
