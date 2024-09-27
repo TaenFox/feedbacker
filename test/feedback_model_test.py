@@ -1,4 +1,4 @@
-from feedback import Feedback
+from model.feedback import Feedback
 import uuid, json
 import pytest
 

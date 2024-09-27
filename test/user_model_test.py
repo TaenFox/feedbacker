@@ -1,4 +1,4 @@
-from user import User
+from model.user import User
 import uuid, json
 import pytest
 
