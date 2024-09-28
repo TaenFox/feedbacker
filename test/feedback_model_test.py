@@ -13,9 +13,7 @@ def fix_feedback_data():
     }
 
 def test_import_feedback_model_from_dict(fix_feedback_data):
-    '''Тест проверяет работоспособность класса Feedback:
-    - создание экземпляра класса
-    - выдачу данных экземпляра класса как словарь'''
+    '''Тест проверяет импорт класса Feedback из словаря'''
     feedback_obj = Feedback()
     feedback_obj.from_dict(fix_feedback_data)
     assert feedback_obj.to_dict() == fix_feedback_data
