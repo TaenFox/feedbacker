@@ -1,70 +1,84 @@
-from data.file_database import FileDataBase as db_class
-import os
+from data.file_database import FileDataBase
+# import os
 
-def get_feedback_by_id(feedbackId:str)-> dict:
-    '''Получает словарь значений, соответствующих фидбеку с id={feedbackId}'''
-    try:
-        db = db_class(f"{os.curdir}/data/feedback")
-        data = db.get_by_id(feedbackId)
-        return data
-    except Exception as e:
-        print(f"Can't get feedback by id = {feedbackId}: {e}")
-        return None
+class FeedbackDTO():
+    path: str
+    db: FileDataBase
 
-def add_feedback_by_id(feedbackId:str, data:dict)-> dict:
-    '''Сохраняет словарь значений, переданных в словаре data. 
-    Сохраняется с id={feedbackId}. Возвращает результат сохранения'''
-    try:
-        db = db_class(f"{os.curdir}/data/feedback")
-        db.add_by_id(feedbackId, data)
-        data = db.get_by_id(feedbackId)
-        return data
-    except Exception as e:
-        print(f"Can't add feedback by id = {feedbackId}: {e}")
-        return None
+    def __init__(self, path:str = "") -> None:
+        if path == "":
+            path = "./data/feedback"
 
-def modify_feedback_by_id(feedbackId:str, data:dict)-> dict:
-    '''Заменяет словарь значений, переданных в словаре data в файле
-    с id={feedbackId}. Возвращает результат сохранения'''
-    try:
-        db = db_class(f"{os.curdir}/data/feedback")
-        db.modify_by_id(feedbackId, data)
-        data = db.get_by_id(feedbackId)
-        return data
-    except Exception as e:
-        print(f"Can't modify feedback by id = {feedbackId}: {e}")
-        return None
-    
-def get_user_by_id(userId:str)-> dict:
-    '''Получает словарь значений, соответствующих пользователю с id={userId}'''
-    try:
-        db = db_class(f"{os.curdir}/data/user")
-        data = db.get_by_id(userId)
-        return data
-    except Exception as e:
-        print(f"Can't get user by id = {userId}: {e}")
-        return None
+        self.db = FileDataBase(path)
 
-def add_user_by_id(userId:str, data:dict)-> dict:
-    '''Сохраняет словарь значений, переданных в словаре data. 
-    Сохраняется с id={userId}. Возвращает результат сохранения'''
-    try:
-        db = db_class(f"{os.curdir}/data/user")
-        db.add_by_id(userId, data)
-        data = db.get_by_id(userId)
-        return data
-    except Exception as e:
-        print(f"Can't add user by id = {userId}: {e}")
-        return None
-    
-def modify_user_by_id(userId:str, data:dict)-> dict:
-    '''Заменяет словарь значений, переданных в словаре data в файле
-    с id={userId}. Возвращает результат сохранения'''
-    try:
-        db = db_class(f"{os.curdir}/data/user")
-        db.modify_by_id(userId, data)
-        data = db.get_by_id(userId)
-        return data
-    except Exception as e:
-        print(f"Can't modify user by id = {userId}: {e}")
-        return None
+    def get_feedback_by_id(self, feedback_id:str)-> dict:
+        '''Получает словарь значений, соответствующих фидбеку с id={feedback_id}'''
+        try:
+            data = self.db.get_by_id(feedback_id)
+            return data
+        except Exception as e:
+            print(f"Can't get feedback by id = {feedback_id}: {e}")
+            return None
+
+    def add_feedback_by_id(self, feedback_id:str, data:dict)-> dict:
+        '''Сохраняет словарь значений, переданных в словаре data. 
+        Сохраняется с id={feedback_id}. Возвращает результат сохранения'''
+        try:
+            self.db.add_by_id(feedback_id, data)
+            data = self.db.get_by_id(feedback_id)
+            return data
+        except Exception as e:
+            print(f"Can't add feedback by id = {feedback_id}: {e}")
+            return None
+
+    def modify_feedback_by_id(self, feedback_id:str, data:dict)-> dict:
+        '''Заменяет словарь значений, переданных в словаре data в файле
+        с id={feedback_id}. Возвращает результат сохранения'''
+        try:
+            self.db.modify_by_id(feedback_id, data)
+            data = self.db.get_by_id(feedback_id)
+            return data
+        except Exception as e:
+            print(f"Can't modify feedback by id = {feedback_id}: {e}")
+            return None
+
+class UserDTO():
+    path: str
+    db: FileDataBase
+
+    def __init__(self, path:str = "") -> None:
+        if path == "":
+            path = "./data/user"
+
+        self.db = FileDataBase(path)
+        
+    def get_user_by_id(self, userId:str)-> dict:
+        '''Получает словарь значений, соответствующих пользователю с id={userId}'''
+        try:
+            data = self.db.get_by_id(userId)
+            return data
+        except Exception as e:
+            print(f"Can't get user by id = {userId}: {e}")
+            return None
+
+    def add_user_by_id(self, userId:str, data:dict)-> dict:
+        '''Сохраняет словарь значений, переданных в словаре data. 
+        Сохраняется с id={userId}. Возвращает результат сохранения'''
+        try:
+            self.db.add_by_id(userId, data)
+            data = self.db.get_by_id(userId)
+            return data
+        except Exception as e:
+            print(f"Can't add user by id = {userId}: {e}")
+            return None
+        
+    def modify_user_by_id(self, userId:str, data:dict)-> dict:
+        '''Заменяет словарь значений, переданных в словаре data в файле
+        с id={userId}. Возвращает результат сохранения'''
+        try:
+            self.db.modify_by_id(userId, data)
+            data = self.db.get_by_id(userId)
+            return data
+        except Exception as e:
+            print(f"Can't modify user by id = {userId}: {e}")
+            return None
