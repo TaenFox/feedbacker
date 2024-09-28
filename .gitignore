@@ -3,3 +3,4 @@
 data/feedback*
 data/user*
 *.pytest_cache*
+*.DS_Store
