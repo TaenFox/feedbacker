@@ -2,3 +2,4 @@
 .vscode*
 data/feedback*
 data/user*
+*.pytest_cache*

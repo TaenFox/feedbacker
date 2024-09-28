@@ -1,10 +1,12 @@
-import json, os
+import json
 
 class FileDataBase():
     def __init__(self, catalog:str) -> None:
-        self.catalog = f"{os.curdir}/data/{catalog}"
+        # self.catalog = f"{os.curdir}/data/{catalog}"
+        self.catalog = f"{catalog}"
 
-    def getById(self, id:str)-> dict:
+
+    def get_by_id(self, id:str)-> dict:
         '''Извлекает информацию из json-файла в указанной директории, 
         название которого соответствует маске `{id}.json`. 
         Возвращает словарь'''
@@ -16,7 +18,7 @@ class FileDataBase():
         except Exception as e:
             print(f"Can't read file {id}.json: {e}")
 
-    def addById(self, id:str, data:dict)-> dict:
+    def add_by_id(self, id:str, data:dict)-> dict:
         '''Сохраняет информацию в json-файл в указанной директории, 
         название которого соответствует маске `{id}.json`.
         В случае успеха возвращает сохранённый словарь значений'''
@@ -29,14 +31,14 @@ class FileDataBase():
             return None
         
         try:
-            savedData = self.getById(id=id)
+            savedData = self.get_by_id(id=id)
             if data != savedData: raise Exception("Input data doesn't match with saved data")
             return savedData
         except Exception as e:
             print(f"Error creating file {id}.json: {e}")
             return None
         
-    def modifyById(self, id:str, data:dict):
+    def modify_by_id(self, id:str, data:dict):
         '''Изменяет информацию в json-файл в указанной директории, 
         название которого соответствует маске `{id}.json`.
         В случае успеха возвращает сохранённый словарь значений'''
@@ -48,7 +50,7 @@ class FileDataBase():
             print(f"Can't modify file {id}.json: {e}")
 
         try:
-            savedData = self.getById(id=id)
+            savedData = self.get_by_id(id=id)
             if data != savedData: raise Exception("Input data doesn't match with saved data")
             return savedData
         except Exception as e:
