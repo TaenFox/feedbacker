@@ -1,8 +1,10 @@
-import json, os
+import json
 
 class FileDataBase():
     def __init__(self, catalog:str) -> None:
-        self.catalog = f"{os.curdir}/data/{catalog}"
+        # self.catalog = f"{os.curdir}/data/{catalog}"
+        self.catalog = f"{catalog}"
+
 
     def get_by_id(self, id:str)-> dict:
         '''Извлекает информацию из json-файла в указанной директории, 
