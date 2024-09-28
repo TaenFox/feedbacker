@@ -4,20 +4,20 @@ class User():
     sent_feedback_ids = list
     recieved_feedback_ids = list
 
-    def __init__(self, data: dict) -> None:
+    def from_dict(self, data: dict) -> None:
         '''
         Объект пользователя. В аргументе передаётся словарь с ключами (значения в них строковые):
         - user_id - идентификатор пользователя
         - sent_feedback_ids - список идентификаторов отправленных сообщений с фидбеком
         - recieved_feedback_ids - список идентификаторов полученных сообщений с фидбеком
         '''
-        if "user_id" not in data: raise Exception("No 'user_id' in 'data'")
-        if type(data["user_id"]) is not str: raise Exception("Field 'user_id' should be string")
-        if len(data["user_id"]) == 0: raise Exception("Field 'user_id' must not be empty")
-        if "sent_feedback_ids" not in data: raise Exception("No 'sent_feedback_ids' in 'data'")
-        if type(data["sent_feedback_ids"]) is not list: raise Exception("Field 'sent_feedback_ids' should be list")
-        if "recieved_feedback_ids" not in data: raise Exception("No 'recieved_feedback_ids' in 'data'")
-        if type(data["recieved_feedback_ids"]) is not list: raise Exception("Field 'recieved_feedback_ids' should be list")
+        if "user_id" not in data: raise ImportWarning("No 'user_id' in 'data'")
+        if type(data["user_id"]) is not str: raise TypeError("Field 'user_id' should be string")
+        if len(data["user_id"]) == 0: raise ImportWarning("Field 'user_id' must not be empty")
+        if "sent_feedback_ids" not in data: raise ImportWarning("No 'sent_feedback_ids' in 'data'")
+        if type(data["sent_feedback_ids"]) is not list: raise TypeError("Field 'sent_feedback_ids' should be list")
+        if "recieved_feedback_ids" not in data: raise ImportWarning("No 'recieved_feedback_ids' in 'data'")
+        if type(data["recieved_feedback_ids"]) is not list: raise TypeError("Field 'recieved_feedback_ids' should be list")
         
         try:
             self.user_id = data["user_id"]

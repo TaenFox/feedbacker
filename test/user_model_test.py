@@ -11,11 +11,11 @@ def fix_user_data():
         "recieved_feedback_ids":[]
     }
 
-def test_create_user_model(fix_user_data):
-    '''Тест проверяет работоспособность класса User:
-    - создание экземпляра класса
-    - выдачу данных экземпляра класса как словарь'''
-    assert User(fix_user_data).to_dict() == fix_user_data
+def test_import_user_model_from_dict(fix_user_data):
+    '''Тест проверяет импорт класса User из словаря'''
+    user_obj = User()
+    user_obj.from_dict(fix_user_data)
+    assert user_obj.to_dict() == fix_user_data
 
 def test_wrong_type_user_id(fix_user_data):
     '''Тест проверяет корректность отработки исключения 
@@ -30,7 +30,7 @@ def test_wrong_type_sent_feedback_ids(fix_user_data):
     на тип данных список в поле sent_feedback_ids'''
     wrong_data = fix_user_data
     wrong_data["sent_feedback_ids"] = "test_string"
-    with pytest.raises(Exception):
+    with pytest.raises(TypeError):
         User(wrong_data)
 
 def test_wrong_type_recieved_feedback_ids(fix_user_data):
@@ -38,5 +38,5 @@ def test_wrong_type_recieved_feedback_ids(fix_user_data):
     на тип данных список в поле recieved_feedback_ids'''
     wrong_data = fix_user_data
     wrong_data["recieved_feedback_ids"] = "test_string"
-    with pytest.raises(Exception):
+    with pytest.raises(TypeError):
         User(wrong_data)
