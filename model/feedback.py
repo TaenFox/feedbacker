@@ -5,7 +5,7 @@ class Feedback():
     author_id: str
     receiver_id: str
 
-    def __init__(self, data: dict) -> None:
+    def from_dict(self, data: dict) -> None:
         '''
         Объект фидбека. В аргументы передаётся словарь с ключами (значения в них строковые):
         - feedback_id - идентификатор фидбека
@@ -14,14 +14,14 @@ class Feedback():
         - receiver_id - идентификатор получателя фидбека
         '''
         
-        if "feedback_id" not in data: raise Exception("No 'feedback_id' in 'data'")
-        if type(data["feedback_id"]) is not str: raise Exception("Field 'feedback_id' should be string")
-        if "content" not in data: raise Exception("No 'content' in 'data'")
-        if type(data["content"]) is not str: raise Exception("Field 'content' should be string")
-        if "author_id" not in data: raise Exception("No 'author_id' in 'data'")
-        if type(data["author_id"]) is not str: raise Exception("Field 'author_id' should be string")
-        if "receiver_id" not in data: raise Exception("No 'receiver_id' in 'data'")
-        if type(data["receiver_id"]) is not str: raise Exception("Field 'receiver_id' should be string")
+        if "feedback_id" not in data: raise ImportWarning("No 'feedback_id' in 'data'")
+        if type(data["feedback_id"]) is not str: raise TypeError("Field 'feedback_id' should be string")
+        if "content" not in data: raise ImportWarning("No 'content' in 'data'")
+        if type(data["content"]) is not str: raise TypeError("Field 'content' should be string")
+        if "author_id" not in data: raise ImportWarning("No 'author_id' in 'data'")
+        if type(data["author_id"]) is not str: raise TypeError("Field 'author_id' should be string")
+        if "receiver_id" not in data: raise ImportWarning("No 'receiver_id' in 'data'")
+        if type(data["receiver_id"]) is not str: raise TypeError("Field 'receiver_id' should be string")
         
         try:
             self.feedback_id = data['feedback_id']
