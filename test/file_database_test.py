@@ -57,3 +57,16 @@ def test_get_by_id_file_not_exists(file_database):
     '''Тестирует обработку случая, когда файл не существует.'''
     result = file_database.get_by_id('nonexistent')
     assert result is None
+
+def test_get_list_of_json_files(file_database):
+    '''Тестирует получение списка созданных файлов'''
+    test_data = [
+        {"number": 1, "colour": "red"},
+        {"number": 2, "colour": "green"},
+        {"number": 3, "colour": "blue"},
+    ]
+    for simple_data in test_data:
+        file_database.add_by_id(simple_data["number"], simple_data)
+    
+    result_list = file_database.get_list()
+    assert test_data == result_list

@@ -1,4 +1,4 @@
-import json
+import json, os, re
 
 class FileDataBase():
     def __init__(self, catalog:str) -> None:
@@ -55,4 +55,21 @@ class FileDataBase():
             return savedData
         except Exception as e:
             print(f"Error creating file {id}.json: {e}")
+            return None
+        
+    def get_list(self):
+        '''Получает список файлов в директории и их 
+        содержимого как список словарей'''
+        try:
+            files = os.listdir(self.catalog)
+            files_list:list = []
+            file_name:str
+            for file_name in files:
+                if not re.match("[A-Za-z|\-|0-9]+(\.json)", file_name): break
+                with open(f"{self.catalog}/{file_name}", "r", encoding="utf-8") as json_file:
+                    json_data = json.load(json_file)
+                files_list.append(json_data)
+            return files_list
+        except Exception as e:
+            print(f"Can't create list of files: {e}")
             return None
