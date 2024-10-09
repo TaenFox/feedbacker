@@ -3,15 +3,22 @@ import os.path
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/..") 
 import uuid, pytest
 
-from data.database_interface import FeedbackDTO
-from usecases import feedback as uc
+from data.database_interface import FeedbackDTO, UserDTO
+from usecases import feedback as uc_feedback, user as uc_user
 
 @pytest.fixture()
 def temp_catalog_feedback(tmp_path):
     '''Создаёт временный каталог feedback для тестов.'''
-    catalog = tmp_path / 'data' / 'feedback'
-    catalog.mkdir(parents=True, exist_ok=True)
-    return catalog
+    catalog_feedback = tmp_path / 'data' / 'feedback'
+    catalog_feedback.mkdir(parents=True, exist_ok=True)
+    return catalog_feedback
+
+@pytest.fixture()
+def temp_catalog_user(tmp_path):
+    '''Создаёт временный каталог user для тестов.'''
+    catalog_user = tmp_path / 'data' / 'user'
+    catalog_user.mkdir(parents=True, exist_ok=True)
+    return catalog_user
 
 def test_data_sent_with_feedback(temp_catalog_feedback):
     feedback_id = str(uuid.uuid4())
@@ -24,8 +31,17 @@ def test_data_sent_with_feedback(temp_catalog_feedback):
         "author_id": author_id,
         "receiver_id": receiver_id
     }
-    recieved_data = uc.save(author_id, receiver_id, feedback_content, feedback_id, temp_catalog_feedback)
+    recieved_data = uc_feedback.save(author_id, receiver_id, feedback_content, feedback_id, temp_catalog_feedback)
 
     saved_data = FeedbackDTO(temp_catalog_feedback).get_feedback_by_id(feedback_id)
+
+    assert reference_data == saved_data
+
+def test_create_new_user(temp_catalog_user):
+
+    reference_data = uc_user.new(temp_catalog_user)
+    user_id = reference_data['user_id']
+
+    saved_data = UserDTO(temp_catalog_user).get_user_by_id(user_id)
 
     assert reference_data == saved_data
