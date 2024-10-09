@@ -24,7 +24,7 @@ def test_data_sent_with_feedback(temp_catalog_feedback):
         "author_id": author_id,
         "receiver_id": receiver_id
     }
-    recieved_data = uc.save_feedback(author_id, receiver_id, feedback_content, feedback_id, temp_catalog_feedback)
+    recieved_data = uc.save(author_id, receiver_id, feedback_content, feedback_id, temp_catalog_feedback)
 
     saved_data = FeedbackDTO(temp_catalog_feedback).get_feedback_by_id(feedback_id)
 

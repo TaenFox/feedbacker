@@ -7,7 +7,7 @@ from model.feedback import Feedback
 from data.database_interface import FeedbackDTO, UserDTO
 import uuid
 
-def save_feedback(author_id:str,
+def save(author_id:str,
             receiver_id:str,
             feedback_context:str,
             feedback_id:str = "",
