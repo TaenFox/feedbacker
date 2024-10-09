@@ -4,7 +4,7 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/..")
 import uuid, pytest
 
 from data.database_interface import FeedbackDTO
-from usecases import send_feedback as uc
+from usecases import feedback as uc
 
 @pytest.fixture()
 def temp_catalog_feedback(tmp_path):
