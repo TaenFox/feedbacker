@@ -52,33 +52,33 @@ class UserDTO():
 
         self.db = FileDataBase(path)
         
-    def get_user_by_id(self, userId:str)-> dict:
-        '''Получает словарь значений, соответствующих пользователю с id={userId}'''
+    def get_user_by_id(self, user_id:str)-> dict:
+        '''Получает словарь значений, соответствующих пользователю с id={user_id}'''
         try:
-            data = self.db.get_by_id(userId)
+            data = self.db.get_by_id(user_id)
             return data
         except Exception as e:
-            print(f"Can't get user by id = {userId}: {e}")
+            print(f"Can't get user by id = {user_id}: {e}")
             return None
 
-    def add_user_by_id(self, userId:str, data:dict)-> dict:
+    def add_user_by_id(self, user_id:str, data:dict)-> dict:
         '''Сохраняет словарь значений, переданных в словаре data. 
-        Сохраняется с id={userId}. Возвращает результат сохранения'''
+        Сохраняется с id={user_id}. Возвращает результат сохранения'''
         try:
-            self.db.add_by_id(userId, data)
-            data = self.db.get_by_id(userId)
+            self.db.add_by_id(user_id, data)
+            data = self.db.get_by_id(user_id)
             return data
         except Exception as e:
-            print(f"Can't add user by id = {userId}: {e}")
+            print(f"Can't add user by id = {user_id}: {e}")
             return None
         
-    def modify_user_by_id(self, userId:str, data:dict)-> dict:
+    def modify_user_by_id(self, user_id:str, data:dict)-> dict:
         '''Заменяет словарь значений, переданных в словаре data в файле
-        с id={userId}. Возвращает результат сохранения'''
+        с id={user_id}. Возвращает результат сохранения'''
         try:
-            self.db.modify_by_id(userId, data)
-            data = self.db.get_by_id(userId)
+            self.db.modify_by_id(user_id, data)
+            data = self.db.get_by_id(user_id)
             return data
         except Exception as e:
-            print(f"Can't modify user by id = {userId}: {e}")
+            print(f"Can't modify user by id = {user_id}: {e}")
             return None
