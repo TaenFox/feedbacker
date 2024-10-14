@@ -55,3 +55,15 @@ def test_is_exist_user_false(temp_catalog_user):
     some_id = str(uuid.uuid4())
     result = uc_user.is_exist(some_id, temp_catalog_user)
     assert result==False
+
+def test_get_user(temp_catalog_user):
+    new_user:UserObj = uc_user.new(temp_catalog_user)
+    get_user:UserObj = uc_user.get(new_user.user_id, temp_catalog_user)
+    assert new_user.to_dict() == get_user.to_dict()
+
+def test_modify_user(temp_catalog_user):
+    new_user:UserObj = uc_user.new(temp_catalog_user)
+    modified_data = new_user.to_dict()
+    modified_data["sent_feedback_ids"].append("test value")
+    modified_user:UserObj = uc_user.modify(new_user, temp_catalog_user)
+    assert modified_data == modified_user.to_dict()
