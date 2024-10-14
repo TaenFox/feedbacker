@@ -21,10 +21,18 @@ def temp_catalog_user(tmp_path):
     catalog_user.mkdir(parents=True, exist_ok=True)
     return catalog_user
 
-def test_data_sent_with_feedback(temp_catalog_feedback):
+@pytest.fixture
+def temp_users_set(temp_catalog_user):
+    '''Создаёт временный набор пользователей'''
+    users_set = []
+    for i in range(10):
+        users_set.append(uc_user.new(temp_catalog_user))
+    return users_set
+
+def test_data_sent_with_feedback(temp_catalog_feedback, temp_catalog_user ,temp_users_set):
     feedback_id = str(uuid.uuid4())
-    author_id = str(uuid.uuid4())
-    receiver_id = str(uuid.uuid4())
+    author_id = temp_users_set[0].user_id
+    receiver_id = temp_users_set[1].user_id
     feedback_content = "test context string"
     reference_data = {
         "feedback_id": feedback_id,
@@ -33,9 +41,20 @@ def test_data_sent_with_feedback(temp_catalog_feedback):
         "receiver_id": receiver_id
     }
     uc_feedback.save(
-        author_id, receiver_id, feedback_content, feedback_id, temp_catalog_feedback)
+        author_id = author_id, 
+        receiver_id = receiver_id, 
+        feedback_context = feedback_content, 
+        feedback_id = feedback_id, 
+        test_path_feedback = temp_catalog_feedback, 
+        test_path_user = temp_catalog_user)
     saved_data = FeedbackDTO(temp_catalog_feedback).get_feedback_by_id(feedback_id)
     assert reference_data == saved_data
+
+    author = uc_user.get(author_id, temp_catalog_user)
+    assert feedback_id in author.sent_feedback_ids
+
+    receiver = uc_user.get(receiver_id, temp_catalog_user)
+    assert feedback_id in receiver.recieved_feedback_ids
 
 def test_create_new_user(temp_catalog_user):
     result_user:UserObj = uc_user.new(temp_catalog_user)
