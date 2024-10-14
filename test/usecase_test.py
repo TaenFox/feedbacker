@@ -5,6 +5,7 @@ import uuid, pytest
 
 from data.database_interface import FeedbackDTO, UserDTO
 from usecases import feedback as uc_feedback, user as uc_user
+from model.user import User as UserObj
 
 @pytest.fixture()
 def temp_catalog_feedback(tmp_path):
@@ -39,9 +40,10 @@ def test_data_sent_with_feedback(temp_catalog_feedback):
 
 def test_create_new_user(temp_catalog_user):
 
-    reference_data = uc_user.new(temp_catalog_user)
-    user_id = reference_data['user_id']
+    result_user:UserObj = uc_user.new(temp_catalog_user)
+    result_data = result_user.to_dict()
+    user_id = result_data['user_id']
 
     saved_data = UserDTO(temp_catalog_user).get_user_by_id(user_id)
 
-    assert reference_data == saved_data
+    assert result_data == saved_data

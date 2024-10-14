@@ -7,6 +7,7 @@ from data.database_interface import UserDTO
 import uuid
 
 def new(test_path = ""):
+    '''Функция создаёт нового пользователя и возвращает '''
     user_id = str(uuid.uuid4())
     user_data = {
         "user_id":user_id,
@@ -20,4 +21,5 @@ def new(test_path = ""):
     user_obj.from_dict(user_data)
 
     saved_data = UserDTO(path).add_user_by_id(user_id, user_obj.to_dict())
-    return saved_data
+    user_obj.from_dict(saved_data)
+    return user_obj
